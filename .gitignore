@@ -67,3 +67,7 @@ ehthumbs.db
 Icon
 Thumbs.db
 *.lnk
+
+# Jupyter notebook
+tutorial/.ipynb_checkpoints/
+*.ipynb

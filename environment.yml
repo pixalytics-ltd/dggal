@@ -1,0 +1,19 @@
+name: dggs_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - geojson
+  - ipykernel
+  - ipyleaflet==0.18.0
+  - ipywidgets==7.6.5
+  - jupyter_contrib_nbextensions
+  - jupytext
+  - matplotlib
+  - numpy
+  - pip
+  - python
+  - rasterio
+  - requests
+  - shapely
+prefix: C:\Users\SamanthaLavender\Anaconda3\envs\dggs_env
