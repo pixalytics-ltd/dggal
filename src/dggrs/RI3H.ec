@@ -10,6 +10,8 @@ import "RI9R"
 
 #include <stdio.h>
 
+static define POW_EPSILON = 0.1;
+
 // These DGGRSs have the topology of Goldberg polyhedra class I and II with m = 3^n
 
 // Goldberg polyhedra: https://en.wikipedia.org/wiki/Goldberg_polyhedron
@@ -24,7 +26,7 @@ level GP notation Name                             Class       Conway           
    5: GP(9,9)                                      2     dktktkD tktktI        dkdkdkdkdkdI     dkdkdkdkdkD      tdtdtdtdtdD    243                 2432
 */
 
-#define POW3(x) ((x) < sizeof(powersOf3) / sizeof(powersOf3[0]) ? (uint64)powersOf3[x] : (uint64)pow(3, x))
+#define POW3(x) ((x) < sizeof(powersOf3) / sizeof(powersOf3[0]) ? (uint64)powersOf3[x] : (uint64)(pow(3, x) + POW_EPSILON))
 
 public class RhombicIcosahedral3H : DGGRS
 {
@@ -335,6 +337,10 @@ public class RhombicIcosahedral3H : DGGRS
    int getZoneCRSVertices(I3HZone zone, CRS crs, Pointd * vertices)
    {
       uint count = zone.getVertices(vertices), i;
+      int j;
+
+      for(j = 0; j < count; j++)
+         canonicalize5x6(vertices[j], vertices[j]);
 
       switch(crs)
       {
@@ -369,6 +375,11 @@ public class RhombicIcosahedral3H : DGGRS
       Pointd v5x6[6];
       uint count = zone.getVertices(v5x6), i;
       bool oddGrid = zone.subHex > 2;
+      int j;
+
+      for(j = 0; j < count; j++)
+         canonicalize5x6(v5x6[j], v5x6[j]);
+
       for(i = 0; i < count; i++)
          pj.inverse(v5x6[i], vertices[i], oddGrid);
       return count;
